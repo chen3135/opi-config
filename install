@@ -12,6 +12,10 @@ cp ./opi-config-submenu /usr/bin
 cp ./h3disp /usr/bin
 cp ./softy /usr/bin
 cp ./orangepi-release /etc/
+if [ ! -d ./temp ]; then
+	mkdir ./temp
+fi
+
 if [ -d /etc/update-motd.d ]; then
 	mv /etc/update-motd.d/* ./temp/
 	cp ./update-motd.d/* /etc/update-motd.d/
