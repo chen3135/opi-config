@@ -1,0 +1,20 @@
+#!/bin/bash
+
+if [[ $EUID != 0 ]]; then
+	echo "This tool requires root privileges. Try again with \"sudo \" please ..." >&2
+	sleep 2
+	exit 1
+fi
+
+cp ./opi-config /usr/bin
+cp ./opi-config-jobs /usr/bin
+cp ./opi-config-submenu /usr/bin
+cp ./h3disp /usr/bin
+cp ./softy /usr/bin
+cp ./orangepi-release /etc/
+if [ -d /etc/update-motd.d ]; then
+	mv /etc/update-motd.d/* ./temp/
+	cp ./update-motd.d/* /etc/update-motd.d/
+else
+	cp ./update-motd.d /etc/ -r
+fi

@@ -1,0 +1,27 @@
+#!/bin/bash
+
+THIS_SCRIPT="header"
+MOTD_DISABLE=""
+#[[ -f /etc/default/armbian-motd ]] && . /etc/default/armbian-motd
+
+for f in $MOTD_DISABLE; do
+	[[ $f == $THIS_SCRIPT ]] && exit 0
+done
+#command -v figlet >/dev/null 2>&1 || \
+#apt-get -qq -y --no-install-recommends install figlet > /dev/null 2>&1
+#command -v toilet >/dev/null 2>&1 || \
+#apt-get -qq -y --no-install-recommends install toilet > /dev/null 2>&1
+
+. /etc/os-release
+. /etc/orangepi-release
+
+KERNELID=$(uname -r)
+
+if [ $(echo $BOARD_NAME | wc -c) -ge 18 ]; then
+	TERM=linux toilet -f standard -F metal $(echo $BOARD_NAME | sed 's/Orange Pi/OPi/')
+else
+	TERM=linux toilet -f standard -F metal $BOARD_NAME
+fi
+
+#printf '\nWelcome to \e[0;91mUbuntu\x1B[0m %s %s %s %s\n' "$VERSION $IMAGE_TYPE $PRETTY_NAME $KERNELID"
+printf "\n"

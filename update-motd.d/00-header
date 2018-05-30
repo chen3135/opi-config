@@ -1,0 +1,6 @@
+#!/bin/bash
+
+. /etc/os-release
+. /etc/orangepi-release
+
+printf "\nWelcome to %s (%s %s %s)\n\n" "$PRETTY_NAME $KERNELID" "$(uname -o)" "$(uname -r)" "$(uname -m)"
